@@ -65,7 +65,3 @@ app.post("/create_preference", async (req, res) => {
     res.status(500).json({ ok: false, error: err.message });
   }
 });
-
-app.listen(port, () =>
-  console.log(`Servidor Mercado Pago escuchando en http://localhost:${port}`)
-);
