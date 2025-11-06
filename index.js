@@ -16,7 +16,7 @@ const client = new MercadoPagoConfig({
 
 // ⚙️ Middleware
 app.use(cors({
-  origin: "http://localhost:5173", // tu frontend
+  origin: "https://pr-e-commerce-con-carrito.vercel.app/", // tu frontend
   methods: ["GET", "POST"],
 }));
 app.use(express.json());
