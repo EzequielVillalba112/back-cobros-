@@ -7,7 +7,6 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const app = express();
-const port = 3000;
 
 // 🔐 Configuración del cliente
 const client = new MercadoPagoConfig({
@@ -16,7 +15,7 @@ const client = new MercadoPagoConfig({
 
 // ⚙️ Middleware
 app.use(cors({
-  origin: "https://pr-e-commerce-con-carrito.vercel.app/", // tu frontend
+  origin: "https://pr-e-commerce-con-carrito.vercel.app",
   methods: ["GET", "POST"],
 }));
 app.use(express.json());
