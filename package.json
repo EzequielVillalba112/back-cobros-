@@ -1,0 +1,19 @@
+{
+  "name": "server-e-com",
+  "version": "1.0.0",
+  "description": "server para pagos de e-commers usando mercado pago",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^2.2.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "mercadopago": "^2.10.0"
+  }
+}
