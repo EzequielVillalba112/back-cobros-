@@ -14,10 +14,29 @@ const client = new MercadoPagoConfig({
 });
 
 // ⚙️ Middleware
+// ✅ CORS flexible para todos los subdominios de Vercel y localhost
 app.use(cors({
-  origin: "https://pr-e-commerce-con-carrito.vercel.app",
+  origin: (origin, callback) => {
+    const allowedOrigins = [
+      "http://localhost:5173",
+      "https://pr-e-commerce-con-carrito.vercel.app"
+    ];
+
+    // Permitir subdominios temporales de vercel.app
+    if (
+      !origin ||
+      allowedOrigins.includes(origin) ||
+      origin.endsWith(".vercel.app")
+    ) {
+      callback(null, true);
+    } else {
+      console.log("❌ Bloqueado por CORS:", origin);
+      callback(new Error("No autorizado por CORS"));
+    }
+  },
   methods: ["GET", "POST"],
 }));
+
 app.use(express.json());
 
 // 🧩 Rutas
