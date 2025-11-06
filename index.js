@@ -7,37 +7,44 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const app = express();
+const port = 3000;
 
 // 🔐 Configuración del cliente
 const client = new MercadoPagoConfig({
-  accessToken: process.env.ACCESS_TOKEN
+  accessToken: process.env.ACCESS_TOKEN,
 });
 
 // ⚙️ Middleware
 // ✅ CORS flexible para todos los subdominios de Vercel y localhost
-app.use(cors({
-  origin: (origin, callback) => {
-    const allowedOrigins = [
-      "http://localhost:5173",
-      "https://pr-e-commerce-con-carrito.vercel.app"
-    ];
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      const allowedOrigins = [
+        "http://localhost:5173",
+        "https://pr-e-commerce-con-carrito.vercel.app",
+      ];
 
-    // Permitir subdominios temporales de vercel.app
-    if (
-      !origin ||
-      allowedOrigins.includes(origin) ||
-      origin.endsWith(".vercel.app")
-    ) {
-      callback(null, true);
-    } else {
-      console.log("❌ Bloqueado por CORS:", origin);
-      callback(new Error("No autorizado por CORS"));
-    }
-  },
-  methods: ["GET", "POST"],
-}));
+      // Permitir subdominios temporales de vercel.app
+      if (
+        !origin ||
+        allowedOrigins.includes(origin) ||
+        origin.endsWith(".vercel.app")
+      ) {
+        callback(null, true);
+      } else {
+        console.log("❌ Bloqueado por CORS:", origin);
+        callback(new Error("No autorizado por CORS"));
+      }
+    },
+    methods: ["GET", "POST"],
+  })
+);
 
 app.use(express.json());
+
+app.listen(port, () => {
+  console.log(`Servidor corriendo en puerto ${port}`);
+});
 
 // 🧩 Rutas
 app.get("/", (req, res) => {
